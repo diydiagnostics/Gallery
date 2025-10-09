@@ -9,8 +9,8 @@
     a { display: block; padding: 5px; text-decoration: none; color: #0077cc; }
   </style>
 </head>
-<body>
-
+<body style="background-color:black;">
+  
 <script> 
 const sites = [
   { name: "Break or Sprain?", url: "https://shreyaraja.github.io/BreakorSprain/" },
@@ -20,9 +20,9 @@ const sites = [
 
 sites.forEach(site => {
   document.body.innerHTML += `
-    <div class="site-card">
+    <div class="site-card"><center>
       <iframe src="${site.url}"></iframe>
-      <a href="${site.url}" target="_blank">${site.name}</a>
+      <a href="${site.url}" target="_blank">${site.name}</a> </center>
     </div>
   `;
 }); 
