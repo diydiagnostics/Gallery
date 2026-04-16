@@ -12,20 +12,34 @@
 <body style="background-color:black; color: white;">
   
 <script> 
-const sites = [
-  { name: "Break or Sprain?", url: "https://shreyaraja.github.io/BreakorSprain/" },
-  { name: "Migraine or Headache?", url: "https://noora-5643.github.io/App4-Base_Code/" },
-  { name: "Friendship Check-In", url: "https://amaris-0113.github.io/App4-Base_Code/" }
-];
+async function loadSites() {
+  const res = await fetch("sites.txt");
+  const text = await res.text();
 
-sites.forEach(site => {
-  document.body.innerHTML += `
-    <div class="site-card"><center>
-      <iframe src="${site.url}"></iframe>
-      <a href="${site.url}" target="_blank">${site.name}</a> </center>
-    </div>
-  `;
-}); 
+  const sites = text
+    .split("\n")
+    .map(line => line.trim())
+    .filter(line => line.length > 0)
+    .map(url => {
+      // Auto-generate a name from the URL
+      const name = url
+        .replace("https://", "")
+        .replace("http://", "")
+        .split("/")[0];
+      return { name, url };
+    });
+
+  sites.forEach(site => {
+    document.body.innerHTML += `
+      <div class="site-card"><center>
+        <iframe src="${site.url}"></iframe>
+        <a href="${site.url}" target="_blank">${site.name}</a>
+      </center></div>
+    `;
+  });
+}
+
+loadSites();
 </script>
 <p>
   Gallery of DIY 2025 diagnostic apps.</p>
